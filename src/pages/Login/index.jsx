@@ -5,21 +5,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../services/api";
 
 import {
+  Avatar,
   Box,
+  Button,
   CssBaseline,
   Container,
   Divider,
-  Button,
-  Avatar,
-  Typography,
   TextField,
+  Typography,
 } from "@mui/material";
 
 import * as yup from "yup";
-import useStyles from "./styles";
 
 const Login = () => {
-  const classes = useStyles();
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -53,7 +51,14 @@ const Login = () => {
     <>
       <CssBaseline />
       <Container component="main" maxWidth="xs">
-        <Box className={classes.box}>
+        <Box
+          sx={{
+            mt: 10,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <Typography component="h1" variant="h2" sx={{ mb: 4 }}>
             Kenzie Hub
           </Typography>
@@ -86,7 +91,7 @@ const Login = () => {
               {...register("password")}
             />
             <Button
-              className={classes.button}
+              sx={{ mt: 1.5, mb: 1.5 }}
               type="submit"
               fullWidth
               variant="contained"
@@ -105,7 +110,7 @@ const Login = () => {
           </Typography>
           <Divider sx={{ width: "100%" }}>Ou</Divider>
           <Button
-            className={classes.button}
+            sx={{ mt: 1.5, mb: 1.5 }}
             fullWidth
             variant="outlined"
             size="medium"
