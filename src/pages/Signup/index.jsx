@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../services/api";
@@ -17,7 +17,7 @@ import {
 
 import * as yup from "yup";
 
-const Signup = () => {
+const Signup = ({ authenticated }) => {
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -50,14 +50,14 @@ const Signup = () => {
       .post("/users", data)
       .then((response) => {
         console.log(response.data);
-        history.push("/dashboard");
+        history.push("/");
       })
       .catch((err) => console.log(err));
   };
 
-  const signupButtonHandler = () => {
-    return history.push("/signup");
-  };
+  if (authenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <>
@@ -157,7 +157,6 @@ const Signup = () => {
               fullWidth
               variant="contained"
               size="medium"
-              onClick={signupButtonHandler}
             >
               Cadastrar
             </Button>
