@@ -33,8 +33,7 @@ const TechCard = ({ title, status }) => {
               fontSize: "0.8rem",
             }}
           >
-            Neste projeto utilizamos de todo o poder do React para criar uma
-            hamburgueria completa.
+            Uma hamburgueria completa, apenas com React.js.
           </Typography>
         </Box>
       </Container>
