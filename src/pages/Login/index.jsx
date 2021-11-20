@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Lock } from "@mui/icons-material";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,7 +17,7 @@ import {
 
 import * as yup from "yup";
 
-const Login = () => {
+const Login = ({ authenticated, setAuthenticated }) => {
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -42,6 +42,8 @@ const Login = () => {
         localStorage.setItem("@kenzieHub:token", token);
         localStorage.setItem("@kenzieHub:user", JSON.stringify(user));
 
+        setAuthenticated(true);
+
         history.push("/dashboard");
       })
       .catch((err) => console.log(err));
@@ -50,6 +52,10 @@ const Login = () => {
   const signupButtonHandler = () => {
     return history.push("/signup");
   };
+
+  if (authenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <>
