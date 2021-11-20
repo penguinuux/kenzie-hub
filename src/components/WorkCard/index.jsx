@@ -1,9 +1,9 @@
-import { Box, Grid, Container, Typography } from "@mui/material";
-import { AllInbox } from "@mui/icons-material";
-import { blue } from "@mui/material/colors";
+import { Box, Container, Typography } from "@mui/material";
+import { WorkOutline } from "@mui/icons-material";
+import { purple } from "@mui/material/colors";
 
 const TechCard = ({ title, status }) => {
-  const secondaryBackground = blue[50];
+  const secondaryBackground = purple[50];
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Container sx={{ m: 1, display: "flex", flexDirection: "row" }}>
@@ -20,24 +20,21 @@ const TechCard = ({ title, status }) => {
             mr: 2,
           }}
         >
-          <AllInbox color="primary" />
+          <WorkOutline color="secondary" />
         </Box>
         <Box>
           <Typography component="h3" variant="h6" gutterBottom>
-            JavaScript
+            KenzieShop
           </Typography>
           <Typography
-            variant="subtitle2"
-            color="primary"
+            variant="body1"
             sx={{
-              backgroundColor: secondaryBackground,
-              display: "flex",
-              justifyContent: "center",
-              borderRadius: 2,
-              py: 0.5,
+              color: "#bdbdbd",
+              fontSize: "0.8rem",
             }}
           >
-            Avançado
+            Neste projeto utilizamos de todo o poder do React para criar uma
+            hamburgueria completa.
           </Typography>
         </Box>
       </Container>
