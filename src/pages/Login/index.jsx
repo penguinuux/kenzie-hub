@@ -47,6 +47,10 @@ const Login = () => {
       .catch((err) => console.log(err));
   };
 
+  const signupButtonHandler = () => {
+    return history.push("/signup");
+  };
+
   return (
     <>
       <CssBaseline />
@@ -114,6 +118,7 @@ const Login = () => {
             fullWidth
             variant="outlined"
             size="medium"
+            onClick={signupButtonHandler}
           >
             Cadastrar
           </Button>
