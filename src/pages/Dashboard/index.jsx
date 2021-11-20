@@ -23,14 +23,8 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
     <>
       <CssBaseline />
       <Header />
-      <Grid
-        container
-        component="main"
-        maxWidth="1400px"
-        sx={{ px: 1, py: 2, margin: "0 auto" }}
-        spacing={2}
-      >
-        <Grid item xs={12} sm={6} lg={4}>
+      <Grid container component="main" sx={{ px: 1, py: 2 }} spacing={2}>
+        <Grid item xs={12} sm={6} lg={4.5}>
           <Box
             component="header"
             sx={{
@@ -53,7 +47,7 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             ))}
           </Container>
         </Grid>
-        <Grid item xs={12} sm={6} lg={4}>
+        <Grid item xs={12} sm={6} lg={4.5}>
           <Box
             component="header"
             sx={{
@@ -76,7 +70,7 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             ))}
           </Container>
         </Grid>
-        <Grid item xs={12} sm={12} lg={4}>
+        <Grid item xs={12} sm={12} lg={3}>
           <Profile />
         </Grid>
       </Grid>
