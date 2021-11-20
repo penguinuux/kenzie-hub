@@ -5,6 +5,7 @@ import { Add } from "@mui/icons-material";
 import Header from "../../components/Header";
 import TechCard from "../../components/TechCard";
 import WorkCard from "../../components/WorkCard";
+import Profile from "../../components/Profile";
 
 const Dashboard = ({ authenticated, setAuthenticated }) => {
   if (!authenticated) {
@@ -34,7 +35,7 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
                 <Add />
               </Button>
             </Box>
-            <Container>
+            <Container sx={{ mb: 4 }}>
               {[1, 2, 3, 4, 5].map((_) => (
                 <TechCard />
               ))}
@@ -57,12 +58,13 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
                 <Add />
               </Button>
             </Box>
-            <Container>
+            <Container sx={{ mb: 4 }}>
               {[1, 2, 3, 4, 5].map((_) => (
                 <WorkCard />
               ))}
             </Container>
           </Box>
+          <Profile />
         </Container>
       </Container>
     </>
