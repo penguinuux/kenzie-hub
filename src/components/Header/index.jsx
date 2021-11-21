@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, mb: 4 }}>
+    <Box sx={{ flexGrow: 1, mb: 6 }}>
       <AppBar position="static" sx={{ backgroundColor: primary }}>
         <Toolbar sx={{ display: "flex", justifyContent: "flex-end" }}>
           <IconButton
@@ -50,7 +50,12 @@ const Header = () => {
             open={Boolean(anchor)}
             onClose={togleMenu}
           >
-            <MenuItem onClick={togleMenu}>Perfil</MenuItem>
+            <MenuItem
+              onClick={togleMenu}
+              sx={{ display: { xs: "flex", lg: "none" } }}
+            >
+              Perfil
+            </MenuItem>
             <MenuItem onClick={togleMenu}>Sair</MenuItem>
           </Menu>
         </Toolbar>

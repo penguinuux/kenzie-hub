@@ -31,6 +31,17 @@ const TechCard = ({ title, status }) => {
             sx={{
               color: "#bdbdbd",
               fontSize: "0.8rem",
+              height: 20,
+              width: {
+                xs: 178,
+                sm: "auto",
+                md: "auto",
+                lg: "auto",
+                xl: "auto",
+              },
+              overflow: "hidden",
+              whiteSpace: "no-wrap",
+              textOverflow: "ellipsis",
             }}
           >
             Uma hamburgueria completa, apenas com React.js.

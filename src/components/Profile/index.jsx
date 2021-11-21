@@ -7,10 +7,18 @@ const Profile = (props) => {
   const secondaryPurple = purple[50];
 
   return (
-    <Box sx={{ flexGrow: 1, height: 340 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        height: 470,
+        boxShadow: 2,
+        borderTopLeftRadius: 14,
+        borderTopRightRadius: 14,
+      }}
+    >
       <Container
         sx={{
-          backgroundColor: "#9c27b0",
+          backgroundColor: "secondary.main",
           borderTopLeftRadius: 14,
           borderTopRightRadius: 14,
           display: "flex",
@@ -40,6 +48,7 @@ const Profile = (props) => {
           flexGrow: 1,
           backgroundColor: secondaryBlue,
           borderRadius: 2,
+          width: "90%",
           py: 1,
           my: 2,
         }}
@@ -74,6 +83,7 @@ const Profile = (props) => {
           flexGrow: 1,
           backgroundColor: secondaryPurple,
           borderRadius: 2,
+          width: "90%",
           py: 1,
           my: 2,
         }}
