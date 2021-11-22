@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   AppBar,
   Avatar,
@@ -12,8 +13,9 @@ import { blue } from "@mui/material/colors";
 
 const primary = blue[400];
 
-const Header = () => {
+const Header = ({ setAuthenticated }) => {
   const [anchor, setAnchor] = useState(null);
+  const history = useHistory();
 
   const handleMenu = (e) => {
     setAnchor(e.currentTarget);
@@ -21,6 +23,16 @@ const Header = () => {
 
   const togleMenu = () => {
     setAnchor(null);
+  };
+
+  const handleProfile = () => {
+    return undefined;
+  };
+
+  const handleExit = () => {
+    localStorage.clear();
+    setAuthenticated(false);
+    history.push("/");
   };
 
   return (
@@ -51,12 +63,12 @@ const Header = () => {
             onClose={togleMenu}
           >
             <MenuItem
-              onClick={togleMenu}
+              onClick={handleProfile}
               sx={{ display: { xs: "flex", lg: "none" } }}
             >
               Perfil
             </MenuItem>
-            <MenuItem onClick={togleMenu}>Sair</MenuItem>
+            <MenuItem onClick={handleExit}>Sair</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>

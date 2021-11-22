@@ -32,7 +32,7 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
   return (
     <>
       <CssBaseline />
-      <Header />
+      <Header setAuthenticated={setAuthenticated} />
       <Grid container component="main" sx={{ px: 1, py: 2 }} spacing={1}>
         <Grid item xs={12} sm={6} md={6} lg={4} sx={{ pr: 1 }}>
           <Box
