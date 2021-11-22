@@ -66,6 +66,7 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
 
   useEffect(() => {
     updateUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!authenticated) {

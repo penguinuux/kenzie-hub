@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { useHistory, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../services/api";
@@ -21,8 +19,6 @@ import {
 import * as yup from "yup";
 
 const TechModal = ({ open, handleModal, updateUser, token }) => {
-  const history = useHistory();
-
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     status: yup.string().required("Campo obrigatório"),
