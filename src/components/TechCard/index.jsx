@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
 import { AllInbox, Delete, Edit } from "@mui/icons-material";
 import { api } from "../../services/api";
 import { blue } from "@mui/material/colors";
 
+import TechEditModal from "../TechEditModal";
+
 const TechCard = ({ title, status, id, updateUser, token }) => {
+  const [openEditTech, setOpenEditTech] = useState(false);
+  const handleEditTechModal = () => setOpenEditTech(!openEditTech);
+
   const secondaryBackground = blue[50];
 
   const deleteTech = (id) => {
@@ -17,6 +23,10 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
         updateUser();
       })
       .catch((err) => console.log(err));
+  };
+
+  const editTech = () => {
+    handleEditTechModal();
   };
 
   return (
@@ -59,6 +69,7 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end", flexGrow: 1 }}>
           <Edit
+            onClick={() => editTech(id)}
             fontSize="small"
             sx={{
               color: "#00000036",
@@ -78,6 +89,13 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
                 cursor: "pointer",
               },
             }}
+          />
+          <TechEditModal
+            open={openEditTech}
+            handleModal={handleEditTechModal}
+            updateUser={updateUser}
+            token={token}
+            id={id}
           />
         </Box>
       </Container>
