@@ -12,7 +12,6 @@ import {
   InputLabel,
   DialogTitle,
   Dialog,
-  TextField,
   DialogContent,
 } from "@mui/material";
 
@@ -57,7 +56,7 @@ const UpdateTechModal = ({ open, handleModal, updateUser, token, id }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleModal} maxWidth="sm" fullWidth="true">
+    <Dialog open={open} onClose={handleModal} maxWidth="sm" fullWidth>
       <DialogTitle sx={{ m: 0, p: 2 }}>Atualizar Tecnologia</DialogTitle>
       <IconButton
         aria-label="close"

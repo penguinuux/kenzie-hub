@@ -69,7 +69,7 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end", flexGrow: 1 }}>
           <Edit
-            onClick={() => editTech(id)}
+            onClick={editTech}
             fontSize="small"
             sx={{
               color: "#00000036",

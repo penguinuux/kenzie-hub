@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
 import { WorkOutline, Delete, Edit } from "@mui/icons-material";
 import { api } from "../../services/api";
 import { purple } from "@mui/material/colors";
 
+import WorkEditModal from "../WorkEditModal";
+
 const TechCard = ({ title, status, id, updateUser, token }) => {
+  const [openEditWork, setOpenEditWork] = useState(false);
+  const handleEditWorkModal = () => setOpenEditWork(!openEditWork);
+
   const secondaryBackground = purple[50];
 
   const deleteWork = (id) => {
@@ -17,6 +23,10 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
         updateUser();
       })
       .catch((err) => console.log(err));
+  };
+
+  const editWork = () => {
+    handleEditWorkModal();
   };
 
   return (
@@ -64,6 +74,7 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end", flexGrow: 1 }}>
           <Edit
+            onClick={editWork}
             fontSize="small"
             sx={{
               color: "#00000036",
@@ -83,6 +94,13 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
                 cursor: "pointer",
               },
             }}
+          />
+          <WorkEditModal
+            open={openEditWork}
+            handleModal={handleEditWorkModal}
+            updateUser={updateUser}
+            token={token}
+            id={id}
           />
         </Box>
       </Container>

@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { useHistory, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../services/api";
@@ -18,8 +16,6 @@ import {
 import * as yup from "yup";
 
 const WorkModal = ({ open, handleModal, updateUser, token }) => {
-  const history = useHistory();
-
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     description: yup.string().required("Campo obrigatório"),
@@ -62,7 +58,7 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleModal} maxWidth="sm" fullWidth="true">
+    <Dialog open={open} onClose={handleModal} maxWidth="sm" fullWidth>
       <DialogTitle sx={{ m: 0, p: 2 }}>Cadastrar Trabalho</DialogTitle>
       <IconButton
         aria-label="close"
