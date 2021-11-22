@@ -20,7 +20,7 @@ import TechModal from "../../components/TechModal";
 import WorkModal from "../../components/WorkModal";
 
 const Dashboard = ({ authenticated, setAuthenticated }) => {
-  const [token, setToken] = useState(localStorage.getItem("@kenzieHub:token"));
+  const [token] = useState(localStorage.getItem("@kenzieHub:token"));
   const [openTech, setOpenTech] = useState(false);
   const [openWork, setOpenWork] = useState(false);
   const [techList, setTechList] = useState([]);
@@ -110,7 +110,14 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
               <h2>Cadastre sua primeira tecnologia</h2>
             ) : (
               techList.map(({ id, title, status }) => (
-                <TechCard title={title} status={status} key={id} />
+                <TechCard
+                  title={title}
+                  status={status}
+                  id={id}
+                  updateUser={updateUser}
+                  token={token}
+                  key={id}
+                />
               ))
             )}
           </Container>
@@ -149,7 +156,14 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
               <h2>Cadastre seu primeiro projeto</h2>
             ) : (
               worksList.map(({ id, title, status }) => (
-                <WorkCard title={title} status={status} key={id} />
+                <WorkCard
+                  title={title}
+                  status={status}
+                  id={id}
+                  updateUser={updateUser}
+                  token={token}
+                  key={id}
+                />
               ))
             )}
           </Container>

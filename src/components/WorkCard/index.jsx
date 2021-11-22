@@ -1,9 +1,24 @@
 import { Box, Container, Typography } from "@mui/material";
-import { WorkOutline, Delete } from "@mui/icons-material";
+import { WorkOutline, Delete, Edit } from "@mui/icons-material";
+import { api } from "../../services/api";
 import { purple } from "@mui/material/colors";
 
-const TechCard = ({ title, status }) => {
+const TechCard = ({ title, status, id, updateUser, token }) => {
   const secondaryBackground = purple[50];
+
+  const deleteWork = (id) => {
+    api
+      .delete(`/users/works/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        updateUser();
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Container sx={{ m: 1, display: "flex", flexDirection: "row" }}>
@@ -48,7 +63,18 @@ const TechCard = ({ title, status }) => {
           </Typography>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end", flexGrow: 1 }}>
+          <Edit
+            fontSize="small"
+            sx={{
+              color: "#00000036",
+              "&:hover": {
+                color: "#000",
+                cursor: "pointer",
+              },
+            }}
+          />
           <Delete
+            onClick={() => deleteWork(id)}
             fontSize="small"
             sx={{
               color: "#00000036",
