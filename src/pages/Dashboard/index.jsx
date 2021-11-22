@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import {
   Button,
@@ -5,16 +6,29 @@ import {
   Grid,
   CssBaseline,
   Typography,
+  Modal,
   Box,
+  Select,
+  TextField,
+  MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { Add, Close } from "@mui/icons-material";
 
 import Header from "../../components/Header";
 import TechCard from "../../components/TechCard";
 import WorkCard from "../../components/WorkCard";
 import Profile from "../../components/Profile";
+import TechModal from "../../components/TechModal";
 
 const Dashboard = ({ authenticated, setAuthenticated }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleModal = () => setOpen(!open);
+
   if (!authenticated) {
     return <Redirect to="/" />;
   }
@@ -38,13 +52,14 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             <Typography component="h2" variant="h6" sx={{ pl: 1 }}>
               Minhas Tecnologias
             </Typography>
-            <Button variant="contained" size="small">
+            <Button variant="contained" size="small" onClick={handleModal}>
               <Add />
             </Button>
+            <TechModal open={open} handleModal={handleModal} />
           </Box>
           <Container sx={{ mb: 4 }}>
-            {[1, 2, 3, 4, 5].map((_) => (
-              <TechCard />
+            {[1, 2, 3, 4, 5].map((_, index) => (
+              <TechCard key={index} />
             ))}
           </Container>
         </Grid>
@@ -67,8 +82,8 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             </Button>
           </Box>
           <Container sx={{ mb: 4 }}>
-            {[1, 2, 3, 4, 5].map((_) => (
-              <WorkCard />
+            {[1, 2, 3, 4, 5].map((_, index) => (
+              <WorkCard key={index} />
             ))}
           </Container>
         </Grid>
