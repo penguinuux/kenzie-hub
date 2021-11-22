@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import {
   Button,
@@ -9,7 +9,8 @@ import {
   Box,
 } from "@mui/material";
 
-import { Add, Close } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
+import { api } from "../../services/api";
 
 import Header from "../../components/Header";
 import TechCard from "../../components/TechCard";
@@ -19,11 +20,53 @@ import TechModal from "../../components/TechModal";
 import WorkModal from "../../components/WorkModal";
 
 const Dashboard = ({ authenticated, setAuthenticated }) => {
+  const token = localStorage.getItem("@kenzieHub:token");
   const [openTech, setOpenTech] = useState(false);
   const [openWork, setOpenWork] = useState(false);
+  const [techList, setTechList] = useState([]);
+  const [worksList, setWorksList] = useState([]);
+  const [userProfile, setUserProfile] = useState({});
 
   const handleModalTech = () => setOpenTech(!openTech);
   const handleModalWork = () => setOpenWork(!openWork);
+
+  const updateUser = () => {
+    api
+      .get("/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const {
+          id,
+          name,
+          email,
+          course_module,
+          bio,
+          contact,
+          avatar_url,
+          techs,
+          works,
+        } = response.data;
+        setTechList(techs);
+        setWorksList(works);
+        setUserProfile({
+          id,
+          name,
+          email,
+          course_module,
+          bio,
+          contact,
+          avatar_url,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    updateUser();
+  }, []);
 
   if (!authenticated) {
     return <Redirect to="/" />;
@@ -32,7 +75,11 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
   return (
     <>
       <CssBaseline />
-      <Header setAuthenticated={setAuthenticated} />
+      <Header
+        setAuthenticated={setAuthenticated}
+        name={userProfile.name}
+        avatar_url={userProfile.avatar_url}
+      />
       <Grid container component="main" sx={{ px: 1, py: 2 }} spacing={1}>
         <Grid item xs={12} sm={6} md={6} lg={4} sx={{ pr: 1 }}>
           <Box
@@ -54,9 +101,13 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             <TechModal open={openTech} handleModal={handleModalTech} />
           </Box>
           <Container sx={{ mb: 4 }}>
-            {[1, 2, 3, 4, 5].map((_, index) => (
-              <TechCard key={index} />
-            ))}
+            {techList.length < 0 ? (
+              <h2>Cadastre sua primeira tecnologia</h2>
+            ) : (
+              techList.map(({ id, title, status }) => (
+                <TechCard title={title} status={status} key={id} />
+              ))
+            )}
           </Container>
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={4} sx={{ pr: 1 }}>
@@ -84,9 +135,13 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             <WorkModal open={openWork} handleModal={handleModalWork} />
           </Box>
           <Container sx={{ mb: 4 }}>
-            {[1, 2, 3, 4, 5].map((_, index) => (
-              <WorkCard key={index} />
-            ))}
+            {techList.length < 0 ? (
+              <h2>Cadastre seu primeiro projeto</h2>
+            ) : (
+              worksList.map(({ id, title, status }) => (
+                <WorkCard title={title} status={status} key={id} />
+              ))
+            )}
           </Container>
         </Grid>
         <Grid
@@ -99,7 +154,14 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             },
           }}
         >
-          <Profile />
+          <Profile
+            name={userProfile.name}
+            email={userProfile.email}
+            couser_module={userProfile.course_module}
+            bio={userProfile.bio}
+            contact={userProfile.contact}
+            avatar_url={userProfile.avatar_url}
+          />
         </Grid>
       </Grid>
     </>

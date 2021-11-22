@@ -2,7 +2,7 @@ import { Avatar, Box, Container, Typography } from "@mui/material";
 import { Phone, Email } from "@mui/icons-material";
 import { blue, purple } from "@mui/material/colors";
 
-const Profile = (props) => {
+const Profile = ({ name, email, course_module, contact, bio, avatar_url }) => {
   const secondaryBlue = blue[50];
   const secondaryPurple = purple[50];
 
@@ -28,7 +28,11 @@ const Profile = (props) => {
         }}
       >
         <Box>
-          <Avatar sx={{ width: 70, height: 70, mr: 2.5 }}>P</Avatar>
+          <Avatar
+            sx={{ width: 70, height: 70, mr: 2.5 }}
+            alt={name}
+            src={avatar_url}
+          />
         </Box>
         <Box>
           <Typography
@@ -37,9 +41,10 @@ const Profile = (props) => {
             sx={{ color: "#fff" }}
             gutterBottom
           >
-            Samuel Leão
+            {name}
           </Typography>
-          <Typography sx={{ color: "#fff" }}>Primeiro módulo</Typography>
+          <Typography sx={{ color: "#fff" }}>{course_module}</Typography>
+          <Typography sx={{ color: "#f2f2f2" }}>{bio}</Typography>
         </Box>
       </Container>
       <Container
@@ -73,7 +78,7 @@ const Profile = (props) => {
             Ligar agora
           </Typography>
           <Typography variant="subtitle2" color="GrayText">
-            +55 (84) 99999-9999
+            {contact}
           </Typography>
         </Box>
       </Container>
@@ -108,7 +113,7 @@ const Profile = (props) => {
             Enviar email
           </Typography>
           <Typography variant="subtitle2" color="GrayText">
-            samuel@kenzie.com.br
+            {email}
           </Typography>
         </Box>
       </Container>

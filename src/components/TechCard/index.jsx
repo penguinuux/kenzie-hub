@@ -24,7 +24,7 @@ const TechCard = ({ title, status }) => {
         </Box>
         <Box>
           <Typography component="h3" variant="h6" gutterBottom>
-            JavaScript
+            {title}
           </Typography>
           <Typography
             variant="subtitle2"
@@ -37,7 +37,7 @@ const TechCard = ({ title, status }) => {
               py: 0.5,
             }}
           >
-            Avançado
+            {status}
           </Typography>
         </Box>
       </Container>
