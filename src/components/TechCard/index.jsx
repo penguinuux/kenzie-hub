@@ -1,12 +1,39 @@
+import { useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
-import { AllInbox } from "@mui/icons-material";
+import { AllInbox, Delete, Edit } from "@mui/icons-material";
+import { api } from "../../services/api";
 import { blue } from "@mui/material/colors";
 
-const TechCard = ({ title, status }) => {
+import TechEditModal from "../TechEditModal";
+
+const TechCard = ({ title, status, id, updateUser, token }) => {
+  const [openEditTech, setOpenEditTech] = useState(false);
+  const handleEditTechModal = () => setOpenEditTech(!openEditTech);
+
   const secondaryBackground = blue[50];
+
+  const deleteTech = (id) => {
+    api
+      .delete(`/users/techs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        updateUser();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const editTech = () => {
+    handleEditTechModal();
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Container sx={{ m: 1, display: "flex", flexDirection: "row" }}>
+      <Container
+        sx={{ m: 1, display: "flex", flexDirection: "row", flexGrow: 1 }}
+      >
         <Box
           item
           sx={{
@@ -24,7 +51,7 @@ const TechCard = ({ title, status }) => {
         </Box>
         <Box>
           <Typography component="h3" variant="h6" gutterBottom>
-            JavaScript
+            {title}
           </Typography>
           <Typography
             variant="subtitle2"
@@ -37,8 +64,39 @@ const TechCard = ({ title, status }) => {
               py: 0.5,
             }}
           >
-            Avançado
+            {status}
           </Typography>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "flex-end", flexGrow: 1 }}>
+          <Edit
+            onClick={editTech}
+            fontSize="small"
+            sx={{
+              color: "#00000036",
+              "&:hover": {
+                color: "#000",
+                cursor: "pointer",
+              },
+            }}
+          />
+          <Delete
+            onClick={() => deleteTech(id)}
+            fontSize="small"
+            sx={{
+              color: "#00000036",
+              "&:hover": {
+                color: "#000",
+                cursor: "pointer",
+              },
+            }}
+          />
+          <TechEditModal
+            open={openEditTech}
+            handleModal={handleEditTechModal}
+            updateUser={updateUser}
+            token={token}
+            id={id}
+          />
         </Box>
       </Container>
     </Box>

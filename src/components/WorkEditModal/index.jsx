@@ -15,7 +15,16 @@ import {
 
 import * as yup from "yup";
 
-const WorkModal = ({ open, handleModal, updateUser, token }) => {
+const WorkEditModal = ({
+  open,
+  handleModal,
+  updateUser,
+  id,
+  token,
+  title,
+  description,
+  deploy_url,
+}) => {
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     description: yup.string().required("Campo obrigatório"),
@@ -32,8 +41,8 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
 
   const onSubmit = ({ title, description, deploy_url }) => {
     api
-      .post(
-        "/users/works",
+      .put(
+        `/users/works/${id}`,
         {
           title,
           description,
@@ -59,7 +68,7 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
 
   return (
     <Dialog open={open} onClose={handleModal} maxWidth="sm" fullWidth>
-      <DialogTitle sx={{ m: 0, p: 2 }}>Cadastrar Trabalho</DialogTitle>
+      <DialogTitle sx={{ m: 0, p: 2 }}>Atualizar Trabalho</DialogTitle>
       <IconButton
         aria-label="close"
         onClick={handleModal}
@@ -80,6 +89,7 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
             helperText={errors.title?.message}
             margin="dense"
             label="Título"
+            defaultValue={title}
             fullWidth
             {...register("title")}
           />
@@ -89,6 +99,7 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
             helperText={errors.description?.message}
             margin="dense"
             label="Descrição"
+            defaultValue={description}
             fullWidth
             {...register("description")}
           />
@@ -98,6 +109,7 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
             helperText={errors.deploy_url?.message}
             margin="dense"
             label="URL"
+            defaultValue={deploy_url}
             fullWidth
             {...register("deploy_url")}
           />
@@ -109,7 +121,7 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
             fullWidth
             sx={{ mt: 1.5, mb: 2.5 }}
           >
-            Cadastrar
+            Atualizar
           </Button>
         </Box>
       </DialogContent>
@@ -117,4 +129,4 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
   );
 };
 
-export default WorkModal;
+export default WorkEditModal;

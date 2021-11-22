@@ -13,7 +13,7 @@ import { blue } from "@mui/material/colors";
 
 const primary = blue[400];
 
-const Header = ({ setAuthenticated }) => {
+const Header = ({ name, avatar_url, setAuthenticated }) => {
   const [anchor, setAnchor] = useState(null);
   const history = useHistory();
 
@@ -45,7 +45,7 @@ const Header = ({ setAuthenticated }) => {
             onClick={handleMenu}
             color="inherit"
           >
-            <Avatar size="larger">P</Avatar>
+            <Avatar size="larger" alt={name} src={avatar_url} />
           </IconButton>
           <Menu
             id="menu-appbar"

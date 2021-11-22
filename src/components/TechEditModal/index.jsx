@@ -6,20 +6,20 @@ import { Close } from "@mui/icons-material";
 import {
   Box,
   Button,
+  Select,
+  MenuItem,
   IconButton,
+  InputLabel,
   DialogTitle,
   Dialog,
-  TextField,
   DialogContent,
 } from "@mui/material";
 
 import * as yup from "yup";
 
-const WorkModal = ({ open, handleModal, updateUser, token }) => {
+const UpdateTechModal = ({ open, handleModal, updateUser, token, id }) => {
   const schema = yup.object().shape({
-    title: yup.string().required("Campo obrigatório"),
-    description: yup.string().required("Campo obrigatório"),
-    deploy_url: yup.string().required("Campo obrigatório"),
+    status: yup.string().required("Campo obrigatório"),
   });
 
   const {
@@ -30,14 +30,12 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = ({ title, description, deploy_url }) => {
+  const onSubmit = ({ status }) => {
     api
-      .post(
-        "/users/works",
+      .put(
+        `/users/techs/${id}`,
         {
-          title,
-          description,
-          deploy_url,
+          status,
         },
         {
           headers: {
@@ -52,14 +50,14 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
   };
 
   const handleButton = () => {
-    if (!errors.title && !errors.description && !errors.deploy_url) {
+    if (!errors.title && !errors.status) {
       return handleModal();
     }
   };
 
   return (
     <Dialog open={open} onClose={handleModal} maxWidth="sm" fullWidth>
-      <DialogTitle sx={{ m: 0, p: 2 }}>Cadastrar Trabalho</DialogTitle>
+      <DialogTitle sx={{ m: 0, p: 2 }}>Atualizar Tecnologia</DialogTitle>
       <IconButton
         aria-label="close"
         onClick={handleModal}
@@ -74,42 +72,31 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
       </IconButton>
       <DialogContent>
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            autoFocus
-            error={!!errors.title}
-            helperText={errors.title?.message}
-            margin="dense"
-            label="Título"
-            fullWidth
-            {...register("title")}
-          />
-          <TextField
-            autoFocus
-            error={!!errors.description}
-            helperText={errors.description?.message}
-            margin="dense"
-            label="Descrição"
-            fullWidth
-            {...register("description")}
-          />
-          <TextField
-            autoFocus
-            error={!!errors.deploy_url}
-            helperText={errors.deploy_url?.message}
-            margin="dense"
-            label="URL"
-            fullWidth
-            {...register("deploy_url")}
-          />
+          <InputLabel id="register technology">Novo status:</InputLabel>
+          <Select
+            error={!!errors.status}
+            labelId="register technology"
+            label="Módulo"
+            defaultValue="Iniciante"
+            {...register("status")}
+            sx={{ width: 180 }}
+          >
+            <MenuItem value="">
+              <em></em>
+            </MenuItem>
+            <MenuItem value={"Inciante"}>Iniciante</MenuItem>
+            <MenuItem value={"Intermediário"}>Intermediário</MenuItem>
+            <MenuItem value={"Avançado"}>Avançado</MenuItem>
+          </Select>
           <Button
             type="submit"
             onClick={handleButton}
             variant="contained"
-            color="secondary"
+            color="primary"
             fullWidth
             sx={{ mt: 1.5, mb: 2.5 }}
           >
-            Cadastrar
+            Atualizar
           </Button>
         </Box>
       </DialogContent>
@@ -117,4 +104,4 @@ const WorkModal = ({ open, handleModal, updateUser, token }) => {
   );
 };
 
-export default WorkModal;
+export default UpdateTechModal;

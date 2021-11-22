@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { useHistory, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../services/api";
@@ -20,9 +18,7 @@ import {
 
 import * as yup from "yup";
 
-const TechModal = ({ open, handleModal }) => {
-  const history = useHistory();
-
+const TechModal = ({ open, handleModal, updateUser, token }) => {
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     status: yup.string().required("Campo obrigatório"),
@@ -36,15 +32,24 @@ const TechModal = ({ open, handleModal }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // api
-    //   .post("/users", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     history.push("/");
-    //   })
-    //   .catch((err) => console.log(err));
+  const onSubmit = ({ title, status }) => {
+    api
+      .post(
+        "/users/techs",
+        {
+          title,
+          status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        updateUser();
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleButton = () => {
@@ -54,7 +59,7 @@ const TechModal = ({ open, handleModal }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleModal} maxWidth="sm" fullWidth="true">
+    <Dialog open={open} onClose={handleModal} maxWidth="sm" fullWidth>
       <DialogTitle sx={{ m: 0, p: 2 }}>Cadastrar Tecnologia</DialogTitle>
       <IconButton
         aria-label="close"
