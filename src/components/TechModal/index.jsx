@@ -20,7 +20,7 @@ import {
 
 import * as yup from "yup";
 
-const TechModal = ({ open, handleModal }) => {
+const TechModal = ({ open, handleModal, updateUser, token }) => {
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -36,15 +36,24 @@ const TechModal = ({ open, handleModal }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // api
-    //   .post("/users", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     history.push("/");
-    //   })
-    //   .catch((err) => console.log(err));
+  const onSubmit = ({ title, status }) => {
+    api
+      .post(
+        "/users/techs",
+        {
+          title,
+          status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        updateUser();
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleButton = () => {

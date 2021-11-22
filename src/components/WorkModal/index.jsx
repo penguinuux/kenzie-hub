@@ -17,7 +17,7 @@ import {
 
 import * as yup from "yup";
 
-const WorkModal = ({ open, handleModal }) => {
+const WorkModal = ({ open, handleModal, updateUser, token }) => {
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -34,15 +34,25 @@ const WorkModal = ({ open, handleModal }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // api
-    //   .post("/users", data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     history.push("/");
-    //   })
-    //   .catch((err) => console.log(err));
+  const onSubmit = ({ title, description, deploy_url }) => {
+    api
+      .post(
+        "/users/works",
+        {
+          title,
+          description,
+          deploy_url,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        updateUser();
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleButton = () => {

@@ -1,12 +1,14 @@
 import { Box, Container, Typography } from "@mui/material";
-import { AllInbox } from "@mui/icons-material";
+import { AllInbox, Delete } from "@mui/icons-material";
 import { blue } from "@mui/material/colors";
 
 const TechCard = ({ title, status }) => {
   const secondaryBackground = blue[50];
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Container sx={{ m: 1, display: "flex", flexDirection: "row" }}>
+      <Container
+        sx={{ m: 1, display: "flex", flexDirection: "row", flexGrow: 1 }}
+      >
         <Box
           item
           sx={{
@@ -39,6 +41,18 @@ const TechCard = ({ title, status }) => {
           >
             {status}
           </Typography>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "flex-end", flexGrow: 1 }}>
+          <Delete
+            fontSize="small"
+            sx={{
+              color: "#00000036",
+              "&:hover": {
+                color: "#000",
+                cursor: "pointer",
+              },
+            }}
+          />
         </Box>
       </Container>
     </Box>

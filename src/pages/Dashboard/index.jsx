@@ -20,7 +20,7 @@ import TechModal from "../../components/TechModal";
 import WorkModal from "../../components/WorkModal";
 
 const Dashboard = ({ authenticated, setAuthenticated }) => {
-  const token = localStorage.getItem("@kenzieHub:token");
+  const [token, setToken] = useState(localStorage.getItem("@kenzieHub:token"));
   const [openTech, setOpenTech] = useState(false);
   const [openWork, setOpenWork] = useState(false);
   const [techList, setTechList] = useState([]);
@@ -98,7 +98,12 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             <Button variant="contained" size="small" onClick={handleModalTech}>
               <Add />
             </Button>
-            <TechModal open={openTech} handleModal={handleModalTech} />
+            <TechModal
+              open={openTech}
+              handleModal={handleModalTech}
+              updateUser={updateUser}
+              token={token}
+            />
           </Box>
           <Container sx={{ mb: 4 }}>
             {techList.length < 0 ? (
@@ -132,7 +137,12 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             >
               <Add />
             </Button>
-            <WorkModal open={openWork} handleModal={handleModalWork} />
+            <WorkModal
+              open={openWork}
+              handleModal={handleModalWork}
+              updateUser={updateUser}
+              token={token}
+            />
           </Box>
           <Container sx={{ mb: 4 }}>
             {techList.length < 0 ? (

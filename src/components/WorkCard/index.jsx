@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
-import { WorkOutline } from "@mui/icons-material";
+import { WorkOutline, Delete } from "@mui/icons-material";
 import { purple } from "@mui/material/colors";
 
 const TechCard = ({ title, status }) => {
@@ -46,6 +46,18 @@ const TechCard = ({ title, status }) => {
           >
             Uma hamburgueria completa, apenas com React.js.
           </Typography>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "flex-end", flexGrow: 1 }}>
+          <Delete
+            fontSize="small"
+            sx={{
+              color: "#00000036",
+              "&:hover": {
+                color: "#000",
+                cursor: "pointer",
+              },
+            }}
+          />
         </Box>
       </Container>
     </Box>
