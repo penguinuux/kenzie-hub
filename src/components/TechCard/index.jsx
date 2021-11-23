@@ -62,6 +62,7 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
               justifyContent: "center",
               borderRadius: 2,
               py: 0.5,
+              minWidth: 115,
             }}
           >
             {status}
@@ -72,6 +73,7 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
             onClick={editTech}
             fontSize="small"
             sx={{
+              mr: 1,
               color: "#00000036",
               "&:hover": {
                 color: "#000",

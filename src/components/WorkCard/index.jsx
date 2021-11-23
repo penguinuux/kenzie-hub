@@ -1,12 +1,19 @@
 import { useState } from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Link, Typography } from "@mui/material";
 import { WorkOutline, Delete, Edit } from "@mui/icons-material";
 import { api } from "../../services/api";
 import { purple } from "@mui/material/colors";
 
 import WorkEditModal from "../WorkEditModal";
 
-const TechCard = ({ title, status, id, updateUser, token }) => {
+const WorkCard = ({
+  title,
+  description,
+  deploy_url,
+  id,
+  updateUser,
+  token,
+}) => {
   const [openEditWork, setOpenEditWork] = useState(false);
   const handleEditWorkModal = () => setOpenEditWork(!openEditWork);
 
@@ -30,7 +37,11 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+      }}
+    >
       <Container sx={{ m: 1, display: "flex", flexDirection: "row" }}>
         <Box
           item
@@ -49,7 +60,15 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
         </Box>
         <Box>
           <Typography component="h3" variant="h6" gutterBottom>
-            KenzieShop
+            <Link
+              sx={{ color: "#000000de" }}
+              underline="hover"
+              href={deploy_url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {title}
+            </Link>
           </Typography>
           <Typography
             variant="body1"
@@ -69,7 +88,7 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
               textOverflow: "ellipsis",
             }}
           >
-            Uma hamburgueria completa, apenas com React.js.
+            {description}
           </Typography>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end", flexGrow: 1 }}>
@@ -77,6 +96,7 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
             onClick={editWork}
             fontSize="small"
             sx={{
+              mr: 1,
               color: "#00000036",
               "&:hover": {
                 color: "#000",
@@ -108,4 +128,4 @@ const TechCard = ({ title, status, id, updateUser, token }) => {
   );
 };
 
-export default TechCard;
+export default WorkCard;
