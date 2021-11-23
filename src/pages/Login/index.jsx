@@ -63,7 +63,7 @@ const Login = ({ authenticated, setAuthenticated }) => {
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
-            mt: 10,
+            mt: 7,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

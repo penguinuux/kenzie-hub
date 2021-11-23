@@ -107,8 +107,10 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             />
           </Box>
           <Container sx={{ mb: 4 }}>
-            {techList.length < 0 ? (
-              <h2>Cadastre sua primeira tecnologia</h2>
+            {techList.length === 0 ? (
+              <Typography component="h3" variant="h6">
+                Cadastre sua primeira tecnologia
+              </Typography>
             ) : (
               techList.map(({ id, title, status }) => (
                 <TechCard
@@ -153,13 +155,16 @@ const Dashboard = ({ authenticated, setAuthenticated }) => {
             />
           </Box>
           <Container sx={{ mb: 4 }}>
-            {techList.length < 0 ? (
-              <h2>Cadastre seu primeiro projeto</h2>
+            {worksList.length === 0 ? (
+              <Typography component="h3" variant="h6">
+                Cadastre seu primeiro trabalho
+              </Typography>
             ) : (
-              worksList.map(({ id, title, status }) => (
+              worksList.map(({ id, title, description, deploy_url }) => (
                 <WorkCard
                   title={title}
-                  status={status}
+                  description={description}
+                  deploy_url={deploy_url}
                   id={id}
                   updateUser={updateUser}
                   token={token}
