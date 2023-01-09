@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# Kenzie Hub
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### [Visite aqui minha aplicação ](https://react-kenzie-hub.vercel.app/)
 
-## Available Scripts
+Kenziehub é um hub de portfólios de programadores da Kenzie!
+O objetivo dessa aplicação é conseguir criar um frontend de qualidade, utilizando alguns dos conhecimentos em React.
+Nesta aplicação o usuário poderá se cadastrar, adicionar as tecnlogias que ele aprendeu e está aprendendo, assim como seus trabalhos realizados.
 
-In the project directory, you can run:
+## API consumida
 
-### `yarn start`
+Para a realização deste projeto, foi utilizado uma API disponibilizada pelo time da Kenzie. Sua documentação se encontra aqui:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[DOCUMENTAÇÃO DA API](https://github.com/Kenzie-Academy-Brasil-Developers/kenziehub-api)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Style Guide
 
-### `yarn test`
+Para esta aplicação foi utilizado o Figma disponibilizado.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### [Figma](https://www.figma.com/file/ccZ4uMlJtuBQISDzCCI1Vq/Kenzie-Hub?node-id=0%3A1)
 
-### `yarn build`
+## Features implementadas
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- O usuário pode se cadastrar;
+- O usuário pode logar em sua conta;
+- O usuário pode cadastrar as tecnologias que ele conhece;
+- O usuário consegue visualizar e deletar as tecnologias que ele conhece.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Regras de negócio
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Todos os formulários tem validações, para não enviar nenhum dado errado para a API;
+- O Token está sendo salvo no localStorage de forma correta e sendo utilizado para verificar se o usuário está logado ou não;
+- O usuário deslogado não pode acessar o dashboard.
 
-### `yarn eject`
+## Bibliotecas utilizadas
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Material Ui
+- React Router Dom
+- React Hook Form
+- Yup
+- Axios
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Deploy
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+A aplicação foi disponibilizada fazendo o deploy no Versel. O link para acesso está disponibilizado no topo da documentação.
